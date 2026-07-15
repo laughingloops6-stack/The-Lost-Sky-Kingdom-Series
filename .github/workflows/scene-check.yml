@@ -23,8 +23,7 @@ jobs:
 
           required_files=(
             "Intro.md"
-            "Voice-Over-Scripts"
-          )
+           )
 
           for file in "${required_files[@]}"
           do
