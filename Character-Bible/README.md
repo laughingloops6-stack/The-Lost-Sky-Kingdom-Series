@@ -1,0 +1,3 @@
+# Character Bible
+
+Coming soon...
