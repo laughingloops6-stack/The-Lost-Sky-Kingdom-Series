@@ -1,0 +1,54 @@
+name: Scene File Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-scenes:
+    name: Check Story Scene Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check Required Files
+        run: |
+          echo "Checking The Lost Sky Kingdom Series files..."
+
+          required_files=(
+            "Intro.md"
+            "Voice-Over-Scripts"
+          )
+
+          for file in "${required_files[@]}"
+          do
+            if [ -e "$file" ]; then
+              echo "✓ Found: $file"
+            else
+              echo "✗ Missing: $file"
+              exit 1
+            fi
+          done
+
+      - name: Check Scene Files
+        run: |
+          echo "Checking scenes..."
+
+          for i in $(seq -w 1 12)
+          do
+            if [ -f "Scene-$i.md" ]; then
+              echo "✓ Scene-$i found"
+            else
+              echo "⚠ Scene-$i missing"
+            fi
+          done
+
+      - name: Workflow Completed
+        run: |
+          echo "✅ The Lost Sky Kingdom Series workflow completed successfully!"
